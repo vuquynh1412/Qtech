@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Qtech-Detail</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+  <link href="Qtech-Home.css" rel="stylesheet" />
+  <link href="Qtech-Detail.css" rel="stylesheet" />
+  <link href="./js/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+  <link href="./js/owlcarousel/assets/owl.theme.default.min.css" rel="stylesheet">
+
+
+  <link
+    href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+    rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="js/jquery-3.4.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <script src="js/owlcarousel/owl.carousel.min.js"></script>
+
+
+
+  <script>
+
+    $(document).ready(function () {
+      $("#openNav").click(function () {
+        $("#Sidenav").css("width", "220px");
+        $("#overlay").fadeIn();  // Show the overlay
+      });
+
+      $("#closeNav").click(function () {
+        $("#Sidenav").css("width", "0");
+        $("#overlay").fadeOut();  // Hide the overlay
+      });
+
+      // Close sidenav and overlay when the overlay is clicked
+      $("#overlay").click(function () {
+        $("#Sidenav").css("width", "0");
+        $(this).fadeOut();  // Hide the overlay
+      });
+
+      // CLICK DOI HINH
+      $("#smallimgbox img").hover(function () {
+        var linkimg = $(this).attr("src");
+        $("#smallimgbox").find('.image-active').removeClass('image-active')
+        $(this).addClass("image-active");
+
+        $("#bigimage").fadeOut(250, function () {
+          $("#bigimage").attr("src", linkimg);
+          $("#bigimage").fadeIn(250);
+        })
+      })
+
+      $(".owl-carousel").owlCarousel({
+        items: 4,
+        loop: true,
+        dotsEach: true,
+        // nav: true,
+        autoplay: true,
+        autoplayTimeout: 3000,
+        autoplayHoverPause: true,
+        responsiveClass: true,
+        responsive: {
+          0: { items: 1 },
+          420: { items: 2 },
+          576: { items: 2 },
+          768: { items: 3 },
+          992: { items: 4 },
+          1200: { items: 4, },
+        },
+      });
+
+      // Scroll chuot de thay doi Css
+
+      var scroll_pos = 0
+      $(document).scroll(function () {
+        scroll_pos = $(this).scrollTop();
+
+        if (scroll_pos > 0) {
+          $("#topbtn").fadeIn();
+        }
+        else {
+          $("#topbtn").fadeOut();
+        }
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <!-- OVERLAY -->
+  <div id="overlay"> </div>
+  <!-- TOP BTN -->
+  <div class="container-fluid">
+    <div class="row div col-12">
+      <a href="#top" id="topbtn"><i class="fa-solid fa-angles-up"></i></a>
+    </div>
+  </div>
+  <!-- Navi -->
+  <nav class="navbar navbar-expand-lg navbar-container fixed-top" id="bgnavi">
+    <div class="container">
+      <a class="navbar-brand pb-2 nav-logo" href="Qtech-Home.html"><img src="imgs/logoQtech.svg" height="44px" /></a>
+      <div class="row d-lg-none no-gutters">
+        <div class="navbar-icon-container">
+          <img src="imgs/iconsearch-white.svg" class="navbar-icon search-icon-normal" />
+          <img src="imgs/iconsearch-blue.svg" class="navbar-icon search-icon-hover" />
+        </div>
+        <div class="navbar-icon-container">
+          <img src="imgs/iconcart-white.svg" class="navbar-icon cart-icon-normal" />
+          <img src="imgs/iconcart-blue.svg" class="navbar-icon cart-icon-hover" />
+        </div>
+        <div class="navbar-icon-container">
+          <img src="imgs/iconuser-white.svg" class="navbar-icon user-icon-normal" />
+          <img src="imgs/iconuser-blue.svg" class="navbar-icon user-icon-hover" />
+        </div>
+        <div class="navbar-icon-container bars-icon-container" id="openNav">
+          <img src="imgs/icon_bars.svg" class="navbar-icon bars-icon-normal" />
+          <img src="imgs/icon_bars_hover.svg" class="navbar-icon bars-icon-hover" />
+        </div>
+      </div>
+
+      <div class="d-none d-lg-block navbar-collapse space-between">
+        <ul class="navbar-nav mr-auto pr-2">
+          <li class="nav-item nav-item-custom">
+            <a class="nav-link text-center" href="#">Store</a>
+          </li>
+          <li class="nav-item nav-item-custom">
+            <a class="nav-link text-center" href="#">PC</a>
+          </li>
+          <li class="nav-item nav-item-custom">
+            <a class="nav-link text-center" href="Qtech-Products.html">Laptop</a>
+          </li>
+          <li class="nav-item nav-item-custom">
+            <a class="nav-link text-center" href="#">Mouse</a>
+          </li>
+          <li class="nav-item nav-item-custom">
+            <a class="nav-link text-center" href="#">Keyboard</a>
+          </li>
+          <li class="nav-item nav-item-custom">
+            <a class="nav-link text-center" href="#">Headphone</a>
+          </li>
+        </ul>
+        <div class="d-none d-lg-flex align-items-center flex-xl-fill">
+          <form class="d-none d-xl-flex flex-fill search-container mr-4" role="search">
+            <input class="form-control search-input" type="search" placeholder="Search here..." aria-label="Search" />
+            <a class="d-flex align-items-center px-2 search-btn" type="submit">
+              <img src="imgs/iconsearch-gray.svg" class="navbar-icon search-icon-normal" /></a>
+          </form>
+          <div class="d-xl-none d-flex navbar-icon-container">
+            <img src="imgs/iconsearch-white.svg" class="navbar-icon search-icon-normal" />
+            <img src="imgs/iconsearch-blue.svg" class="navbar-icon search-icon-hover" />
+          </div>
+          <div class="navbar-icon-container">
+            <img src="imgs/iconcart-white.svg" class="navbar-icon cart-icon-normal" />
+            <img src="imgs/iconcart-blue.svg" class="navbar-icon cart-icon-hover" />
+          </div>
+          <div class="navbar-icon-container">
+            <img src="imgs/iconuser-white.svg" class="navbar-icon user-icon-normal" />
+            <img src="imgs/iconuser-blue.svg" class="navbar-icon user-icon-hover" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- SIDE MOBILENAVI -->
+  <div id="Sidenav" class="sidenav d-block d-lg-none">
+    <a href="javascript:void(0)" class="closebtn" id="closeNav"><i class="fas fa-times"></i></a>
+    <a href="#">Store</a>
+    <a href="#">PC</a>
+    <a href="#">Laptop</a>
+    <a href="#">Mouse</a>
+    <a href="#">Keyboard</a>
+    <a href="#">Headphone</a>
+  </div>
+
+  <!-- CONTENT1 -->
+  <!-- breadcrumb -->
+  <div class="container">
+    <div class="row">
+      <div class="col-12" id="breadcrumb">
+        <a href="Qtech-Home.html" id="breadcrumb-iconhouse"> <i class="fa-solid fa-house"></i></a>
+        <i class="fa-solid fa-angle-right"></i>
+        <a href="Qtech-Products.html">Laptop</a>
+        <i class="fa-solid fa-angle-right"></i>
+        <span id="thispage">ASUS ROG Flow</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- big img -->
+  <div class="container" id="bgproduct-detail">
+    <div class="row">
+      <div class="col-xl-7 col-lg-7 col-md-12 col-sm-12 col-12" id="bigimgbox">
+        <img src="./imgs/imgproducts-detail1.png" alt="" id="bigimage" class="img-fluid">
+
+        <!-- small img -->
+        <div class="row" id="smallimgbox">
+          <div class="col-4 col-md-2">
+            <img src="./imgs/imgproducts-detail1.png" alt="" class="img-fluid image-active">
+          </div>
+          <div class="col-4 col-md-2">
+            <img src="./imgs/imgproducts-detail2.png" alt="" class="img-fluid">
+          </div>
+          <div class="col-4 col-md-2">
+            <img src="./imgs/imgproducts-detail3.png" alt="" class="img-fluid">
+          </div>
+          <div class="col-4 col-md-2 d-none d-md-block">
+            <img src="./imgs/imgproducts-detail4.png" alt="" class="img-fluid">
+          </div>
+          <div class="col-4 col-md-2 d-none d-md-block">
+            <img src="./imgs/imgproducts-detail5.png" alt="" class="img-fluid">
+          </div>
+        </div>
+      </div>
+
+      <!-- detail -->
+      <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12" id="detail">
+        <h3>Laptop ASUS ROG Flow X16 GV601VV-NL016W (i9-13900H/RAM 16GB/1TB SSD/ Windows 11)</h3>
+        <p>Brand ASUS | SKU: 230300149 | Code: 052884</p>
+        <h5 class="sale-price">$2652</h5>
+        <p class="original-price">$2652</p>
+
+        <hr>
+
+        <h4>PROMOTION</h4>
+        <div>
+          <i class="fa-solid fa-gift icongift"></i>
+          <span class="promotion-content">1x Additional discount code of 25$ for LG Gram Screen.</span>
+        </div>
+        <div>
+          <i class="fa-solid fa-gift icongift"></i>
+          <span class="promotion-content">1x Extra discount code of 20$ for some Logitech, MSI, Asus mice, Zidli
+            Headphones.</span>
+        </div>
+        <div>
+          <i class="fa-solid fa-gift icongift"></i>
+          <span class="promotion-content">Free shipping for orders from 200$.</span>
+        </div>
+
+        <div class="button-container">
+          <button class="btn custom-btn add-to-cart-btn">ADD TO CART</button>
+          <button class="btn custom-btn buy-now-btn">BUY NOW</button>
+        </div>
+
+        <hr>
+
+        <p class="product-detail">- CPU: Intel Core i9-13900H <br>
+          - Screen: 16" (2560 x 1600), 240Hz <br>
+          - RAM: 1 x 16GB DDR5 4800MHz <br>
+          - Graphics: RTX 4060 8GB GDDR6/ Intel Iris Xe Graphics <br>
+          - Storage: 1TB SSD M.2 NVMe <br>
+          - Operating system: Windows 11 Home <br>
+          - Battery: 4 cell 90 Wh Built-in battery <br>
+          - Weight: 2.2kg <br>
+          - Non-EVO standard
+        </p>
+        <a href="#">View detail</a>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- PRODUCT MORE DETAIL -->
+  <div class="container" id="bgproduct-detail">
+    <div class="row">
+      <div class="col-xl-7 col-lg-7 col-md-12 col-sm-12 col-12" id="product-details">
+        <h3>Product Description</h3>
+        <h4>Laptop ASUS ROG Flow X16 GV601VV NL016W</h4>
+        <h6>Impressive performance</h6>
+        <p>Laptop ASUS ROG Flow Possessing one of the highest configurations today with Intel Core i9 13900H gen 13 chip
+          and RTX 4060 Series 4000 graphics card for extremely powerful performance. The machine completely meets all
+          complex usage needs and smoothly handles professional graphics applications and heavy online games...</p>
+        <img src="./imgs/img-description1.png" alt="" class="img-fluid img-description">
+        <h6>Impressive and flexible design</h6>
+        <p>Fast - smooth - flexible are the words that describe the ASUS ROG Flow X16 GV601VV NL016W Laptop, ROG's first
+          16-inch gaming laptop line with a flexible folding design thanks to a 360° hinge. Elevate your style with the
+          Supernova version with a sparkling purple metal logo. The ridges are designed along the chassis for a solid
+          structure and a firm grip. The compact design makes it easy to fit in a bag and has more space for your
+          favorite gaming gear.</p>
+
+
+
+      </div>
+      <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12" id="product-details">
+        <h3>Details</h3>
+        <table class="table table-striped table-dark" id="specs-table">
+          <tbody>
+            <tr>
+              <td>Trademark</td>
+              <td>ASUS</td>
+            </tr>
+            <tr>
+              <td>Guarantee</td>
+              <td>24 months</td>
+            </tr>
+            <tr>
+              <td>General Information</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Series laptop</td>
+              <td>ROG</td>
+            </tr>
+            <tr>
+              <td>Color</td>
+              <td>Black</td>
+            </tr>
+            <tr>
+              <td>Demand</td>
+              <td>Gaming, Office, Graphics - Technical</td>
+            </tr>
+            <tr>
+              <td>Detailed configuration</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>CPU generation</td>
+              <td>Core i9, 13th generation Intel Core, Non-EVO</td>
+            </tr>
+            <tr>
+              <td>CPU</td>
+              <td>Intel Core i9-13900H (2.6 GHz - 5.4GHz / 24MB / 14 cores, 20 threads)</td>
+            </tr>
+            <tr>
+              <td>Graphics chips</td>
+              <td>RTX 4060 8GB GDDR6 / Intel Iris Xe Graphics</td>
+            </tr>
+            <tr>
+              <td>RAM</td>
+              <td>1 x 16GB DDR5 4800MHz ( 2 Slots / Maximum Support 64GB )</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- RELATED PRODUCTS -->
+  <div class="container" id="related-products-container">
+    <h3 class="related-products">Related products</h3>
+    <div class="row owl-carousel owl-theme" id="products-carousel">
+      <div class="col-12"><img class="product-image" src="./imgs/acer.png" />
+        <h4 class="related-title">Laptop ACER Nitro 16
+          RTX 4050/RAM 8GB</h4>
+        <span class="origin-price" style="text-decoration: line-through;">$1304</span>
+        <p class="sale-price">$1217</p>
+      </div>
+      <div class="col-12"><img class="product-image" src="./imgs/acer-i9.png" />
+        <h4 class="related-title">Laptop ACER Predator
+          i9 RAM 32GB</h4>
+        <span class="origin-price" style="text-decoration: line-through;">$5121</span>
+        <p class="sale-price">$4999</p>
+      </div>
+      <div class="col-12"><img class="product-image" src="./imgs/asus_i7.png" />
+        <h4 class="related-title">Laptop ASUS TUF
+          i7 RAM 16GB/512GB</h4>
+        <span class="origin-price" style="text-decoration: line-through;">$1522</span>
+        <p class="sale-price">$1248</p>
+      </div>
+      <div class="col-12"><img class="product-image" src="./imgs/asus_ryzen_9.png" />
+        <h4 class="related-title">Laptop ASUS ROG Flow
+          Ryzen 9/RAM 16GB/1TB </h4>
+        <span class="origin-price" style="text-decoration: line-through;">$2304</span>
+        <p class="sale-price">$2013</p>
+      </div>
+      <div class="col-12"><img class="product-image" src="./imgs/ACER Nitro 5.png" />
+        <h4 class="related-title">Laptop ACER Nitro 5
+          i5 RTX 4050/RAM 8GB</h4>
+        <span class="origin-price" style="text-decoration: line-through;">$1174</span>
+        <p class="sale-price">$1130</p>
+      </div>
+      <div class="col-12"><img class="product-image" src="./imgs/ACER Aspire 7.png" />
+        <h4 class="related-title">Laptop ACER Aspire 7
+          RTX 3050/RAM 8GB</h4>
+        <span class="origin-price" style="text-decoration: line-through;">$957</span>
+        <p class="sale-price">$718</p>
+      </div>
+      <div class="col-12"><img class="product-image" src="./imgs/ACER Nitro Eagle.png" />
+        <h4 class="related-title">Laptop ACER Nitro Eagle
+          i5 RAM 8GB/RTX 3050</h4>
+        <span class="origin-price" style="text-decoration: line-through;">$1130</span>
+        <p class="sale-price">$870</p>
+      </div>
+      <div class="col-12"><img class="product-image" src="./imgs/ACER Swift.png" />
+        <h4 class="related-title">Laptop ACER Swift X
+          i7 RAM 32GB/1TB</h4>
+        <span class="origin-price" style="text-decoration: line-through;">$1783</span>
+        <p class="sale-price">$1699</p>
+      </div>
+      <div class="col-12"><img class="product-image" src="./imgs/ASUS Zephyrus.png" />
+        <h4 class="related-title">Laptop ASUS Zephyrus
+          Ryzen 7/RAM 16GB</h4>
+        <span class="origin-price" style="text-decoration: line-through;">$1870</span>
+        <p class="sale-price">$1863</p>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+  <!-- Footer -->
+  <div class="container-fluid" id="bgfooter">
+    <div class="container">
+      <div class="row">
+        <div class="col-6 col-xl-2 navifooter">
+          <h1>About us</h1>
+          <p>Our story</p>
+          <p>Carrers</p>
+          <p>Services</p>
+          <p>Our Showrooms</p>
+        </div>
+        <div class="col-6 col-xl-2 navifooter">
+          <h1>Support</h1>
+          <p>For Individuals</p>
+          <p>For Business</p>
+          <p>For Education</p>
+          <p>FAQs</p>
+        </div>
+        <div class="col-6 col-xl-2 navifooter">
+          <h1>Customers</h1>
+          <p>Return Policy</p>
+          <p>Email Preferences</p>
+          <p>Student Discount</p>
+        </div>
+        <div class="col-6 col-xl-2 navifooter">
+          <h1>Follow us</h1>
+          <div class="d-flex">
+            <a href="#"><img src="imgs/fb.svg" class="socialicon" /></a>
+            <a href="#"><img src="imgs/insta.svg" class="socialicon" /></a>
+          </div>
+          <div class="d-flex">
+            <a href="#"><img src="imgs/twitter.svg" class="socialicon" /></a>
+            <a href="#"><img src="imgs/yt.svg" class="socialicon" /></a>
+          </div>
+          <div class="d-flex">
+            <a href="#"><img src="imgs/discord.svg" class="socialicon" /></a>
+            <a href="#"><img src="imgs/twitch.svg" class="socialicon" /></a>
+          </div>
+        </div>
+        <div class="col-xl-4 navifooter">
+          <h1>Payment</h1>
+          <div class="d-flex">
+            <img src="imgs/visa.svg" class="paymenticon" />
+            <img src="imgs/paypal.svg" class="paymenticon" />
+            <img src="imgs/applepay.svg" class="paymenticon" />
+            <img src="imgs/vnpay.svg" class="paymenticon" />
+            <img src="imgs/samsungpay.svg" class="paymenticon" />
+          </div>
+          <div class="input-group emailaddress">
+            <input placeholder="Enter Email Address" class="form-control emailinput" />
+            <a href="#" class="searchbutton d-flex align-items-center">
+              <i class="fa-solid fa-paper-plane"></i>
+            </a>
+          </div>
+          <div class="receivenews">
+            <input type="checkbox" class="checkbox" />
+            Yes, i want to receive news and products emails. Read our
+            <a href="#">privacy policy</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Qtech-Products</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <link href="Qtech-Home.css" rel="stylesheet" />
+    <link href="Qtech-Products.css" rel="stylesheet" />
+
+
+
+
+    <link
+        href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+        rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script>
+
+        $(document).ready(function () {
+            $("#openNav").click(function () {
+                $("#Sidenav").css("width", "220px");
+                $("#overlay").fadeIn();
+            });
+
+            $("#closeNav").click(function () {
+                $("#Sidenav").css("width", "0");
+                $("#overlay").fadeOut();
+            });
+
+            $("#overlay").click(function () {
+                $("#Sidenav").css("width", "0");
+                $(this).fadeOut();
+            });
+
+
+            // price range change
+            const rangeInput = document.querySelectorAll(".range-input input"),
+                priceInput = document.querySelectorAll(".price-input input"),
+                range = document.querySelector(".slider .progress");
+            let priceGap = 1000;
+
+            priceInput.forEach(input => {
+                input.addEventListener("input", e => {
+                    let minPrice = parseInt(priceInput[0].value),
+                        maxPrice = parseInt(priceInput[1].value);
+
+                    if ((maxPrice - minPrice >= priceGap) && maxPrice <= rangeInput[1].max) {
+                        if (e.target.className === "input-min") {
+                            rangeInput[0].value = minPrice;
+                            range.style.left = ((minPrice / rangeInput[0].max) * 100) + "%";
+                        } else {
+                            rangeInput[1].value = maxPrice;
+                            range.style.right = 100 - (maxPrice / rangeInput[1].max) * 100 + "%";
+                        }
+                    }
+                });
+            });
+
+            rangeInput.forEach(input => {
+                input.addEventListener("input", e => {
+                    let minVal = parseInt(rangeInput[0].value),
+                        maxVal = parseInt(rangeInput[1].value);
+
+                    if ((maxVal - minVal) < priceGap) {
+                        if (e.target.className === "range-min") {
+                            rangeInput[0].value = maxVal - priceGap
+                        } else {
+                            rangeInput[1].value = minVal + priceGap;
+                        }
+                    } else {
+                        priceInput[0].value = minVal;
+                        priceInput[1].value = maxVal;
+                        range.style.left = ((minVal / rangeInput[0].max) * 100) + "%";
+                        range.style.right = 100 - (maxVal / rangeInput[1].max) * 100 + "%";
+                    }
+                });
+            });
+
+            // product
+            $("#triggerbrand").click(function () {
+                $("#brandbox").slideToggle();
+                $("#triggerbrand i").toggleClass("fa-angle-up fa-angle-down");
+            });
+            $("#triggercolor").click(function () {
+                $("#colorbox").slideToggle();
+                $("#triggercolor i").toggleClass("fa-angle-up fa-angle-down");
+            });
+            $("#triggercpu").click(function () {
+                $("#cpubox").slideToggle();
+                $("#triggercpu i").toggleClass("fa-angle-up fa-angle-down");
+            });
+            $("#triggerchips").click(function () {
+                $("#chipsbox").slideToggle();
+                $("#triggerchips i").toggleClass("fa-angle-up fa-angle-down");
+            });
+            $("#triggerram").click(function () {
+                $("#rambox").slideToggle();
+                $("#triggerram i").toggleClass("fa-angle-up fa-angle-down");
+            });
+            $("#triggerscreen").click(function () {
+                $("#screenbox").slideToggle();
+                $("#triggerscreen i").toggleClass("fa-angle-up fa-angle-down");
+            });
+            $("#triggerresolution").click(function () {
+                $("#resolutionbox").slideToggle();
+                $("#triggerresolution i").toggleClass("fa-angle-up fa-angle-down");
+            });
+            // Scroll chuot de thay doi Css
+
+            var scroll_pos = 0
+            $(document).scroll(function () {
+                scroll_pos = $(this).scrollTop();
+
+                if (scroll_pos > 0) {
+                    $("#topbtn").fadeIn();
+                }
+                else {
+                    $("#topbtn").fadeOut();
+                }
+            });
+        })
+    </script>
+</head>
+
+<body>
+    <!-- OVERLAY -->
+    <div id="overlay"> </div>
+    <!-- TOP BTN -->
+    <div class="container-fluid">
+        <div class="row div col-12">
+            <a href="#top" id="topbtn"><i class="fa-solid fa-angles-up"></i></a>
+        </div>
+    </div>
+    <!-- Navi -->
+    <nav class="navbar navbar-expand-lg navbar-container fixed-top" id="bgnavi">
+        <div class="container">
+            <a class="navbar-brand pb-2 nav-logo" href="Qtech-Home.html"><img src="imgs/logoQtech.svg"
+                    height="44px" /></a>
+            <div class="row d-lg-none no-gutters">
+                <div class="navbar-icon-container">
+                    <img src="imgs/iconsearch-white.svg" class="navbar-icon search-icon-normal" />
+                    <img src="imgs/iconsearch-blue.svg" class="navbar-icon search-icon-hover" />
+                </div>
+                <div class="navbar-icon-container">
+                    <img src="imgs/iconcart-white.svg" class="navbar-icon cart-icon-normal" />
+                    <img src="imgs/iconcart-blue.svg" class="navbar-icon cart-icon-hover" />
+                </div>
+                <div class="navbar-icon-container">
+                    <img src="imgs/iconuser-white.svg" class="navbar-icon user-icon-normal" />
+                    <img src="imgs/iconuser-blue.svg" class="navbar-icon user-icon-hover" />
+                </div>
+                <div class="navbar-icon-container bars-icon-container" id="openNav">
+                    <img src="imgs/icon_bars.svg" class="navbar-icon bars-icon-normal" />
+                    <img src="imgs/icon_bars_hover.svg" class="navbar-icon bars-icon-hover" />
+                </div>
+            </div>
+
+            <div class="d-none d-lg-block navbar-collapse space-between">
+                <ul class="navbar-nav mr-auto pr-2">
+                    <li class="nav-item nav-item-custom">
+                        <a class="nav-link text-center" href="#">Store</a>
+                    </li>
+                    <li class="nav-item nav-item-custom">
+                        <a class="nav-link text-center" href="#">PC</a>
+                    </li>
+                    <li class="nav-item nav-item-custom">
+                        <a class="nav-link text-center" href="Qtech-Products.html">Laptop</a>
+                    </li>
+                    <li class="nav-item nav-item-custom">
+                        <a class="nav-link text-center" href="#">Mouse</a>
+                    </li>
+                    <li class="nav-item nav-item-custom">
+                        <a class="nav-link text-center" href="#">Keyboard</a>
+                    </li>
+                    <li class="nav-item nav-item-custom">
+                        <a class="nav-link text-center" href="#">Headphone</a>
+                    </li>
+                </ul>
+                <div class="d-none d-lg-flex align-items-center flex-xl-fill">
+                    <form class="d-none d-xl-flex flex-fill search-container mr-4" role="search">
+                        <input class="form-control search-input" type="search" placeholder="Search here..."
+                            aria-label="Search" />
+                        <a class="d-flex align-items-center px-2 search-btn" type="submit">
+                            <img src="imgs/iconsearch-gray.svg" class="navbar-icon search-icon-normal" /></a>
+                    </form>
+                    <div class="d-xl-none d-flex navbar-icon-container">
+                        <img src="imgs/iconsearch-white.svg" class="navbar-icon search-icon-normal" />
+                        <img src="imgs/iconsearch-blue.svg" class="navbar-icon search-icon-hover" />
+                    </div>
+                    <div class="navbar-icon-container">
+                        <img src="imgs/iconcart-white.svg" class="navbar-icon cart-icon-normal" />
+                        <img src="imgs/iconcart-blue.svg" class="navbar-icon cart-icon-hover" />
+                    </div>
+                    <div class="navbar-icon-container">
+                        <img src="imgs/iconuser-white.svg" class="navbar-icon user-icon-normal" />
+                        <img src="imgs/iconuser-blue.svg" class="navbar-icon user-icon-hover" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- SIDE MOBILENAVI -->
+    <div id="Sidenav" class="sidenav d-block d-lg-none">
+        <a href="javascript:void(0)" class="closebtn" id="closeNav"><i class="fas fa-times"></i></a>
+        <a href="#">Store</a>
+        <a href="#">PC</a>
+        <a href="Qtech-Products.html">Laptop</a>
+        <a href="#">Mouse</a>
+        <a href="#">Keyboard</a>
+        <a href="#">Headphone</a>
+    </div>
+
+
+    <!-- Banner 1 -->
+    <div class="container-fluid banner-container">
+        <img class="img-fluid" src="imgs/banner1-products.png" />
+        <div class="bannerpdcontent">
+            <div class="container">
+                <h1 class="bannerpdcontent_h1">LAPTOP GAMING</h1>
+                <h3 class="bannerpdcontent_h2">Helios 500 Extreme - Lighting the Way</h3>
+                <div class="row align-items-center justify-content-start">
+                    <button class="btnbanner-pd1 d-none d-md-block" type="button">
+                        ORDER NOW
+                    </button>
+                    <button class="btnbanner-pd2 d-none d-md-block" type="button">
+                        LEARN MORE
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- breadcrumb -->
+    <div class="container">
+        <div class="row">
+            <div class="col-12" id="breadcrumb">
+                <a href="Qtech-Home.html" id="breadcrumb-iconhouse"> <i class="fa-solid fa-house"></i></a>
+                <i class="fa-solid fa-angle-right "></i>
+                <span id="thispage">Laptop</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content 1  -->
+    <div class="container">
+        <div class="row">
+
+            <!-- Filter Column -->
+            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+                <div id="bgcontent-pd">
+                    <!-- Price Filter -->
+                    <h5>Price</h5>
+                    <!-- Price Range Slider -->
+                    <div class="col-12" id="pricefilter">
+                        <div class="price-input">
+                            <div class="field">
+                                <input type="number" class="input-min" value="2500">
+                            </div>
+                            <div class="separator">-</div>
+                            <div class="field">
+                                <input type="number" class="input-max" value="7500">
+                            </div>
+                        </div>
+                        <div class="slider">
+                            <div class="progress"></div>
+                        </div>
+                        <div class="range-input">
+                            <input type="range" class="range-min" min="0" max="10000" value="2500" step="100">
+                            <input type="range" class="range-max" min="0" max="10000" value="7500" step="100">
+                        </div>
+                    </div>
+
+                    <hr color="#7B7981">
+
+                    <!-- Brands Filter -->
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-6 col-sm-6 col-12" id="brandfillter">
+                            <a id="triggerbrand">
+                                <h5>Brands</h5>
+                                <i class="fa-solid fa-angle-up"></i>
+                                <div class="clearf"></div>
+                            </a>
+
+                            <form action="" method="post" id="brandbox">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="fillterhori">
+                                            <input type="checkbox" name="brand" value="acer" id="brand-acer">
+                                            <label for="brand-acer" class="ml-1">ACER</label>
+                                        </div>
+                                        <div class="fillterhori">
+                                            <input type="checkbox" name="brand" value="apple" id="brand-apple">
+                                            <label for="brand-apple" class="ml-1">APPLE</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="fillterhori">
+                                            <input type="checkbox" name="brand" value="asus" id="brand-asus">
+                                            <label for="brand-asus" class="ml-1">ASUS</label>
+                                        </div>
+                                        <div class="fillterhori">
+                                            <input type="checkbox" name="brand" value="razer" id="brand-razer">
+                                            <label for="brand-razer" class="ml-1">RAZER</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <hr color="#7B7981">
+                        </div>
+
+
+                        <div class="col-xl-12 col-lg-12 col-md-6 col-sm-6 col-12" id="colorfillter">
+                            <a id="triggercolor">
+                                <h5>Colors</h5>
+                                <i class="fa-solid fa-angle-up"></i>
+                                <div class="clearf"></div>
+                            </a>
+                            <form action="" method="post" id="colorbox">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="fillterhori">
+                                            <input type="checkbox" name="color" value="silver" id="color-silver">
+                                            <label for="color-silver" class="ml-1">Silver</label>
+                                        </div>
+                                        <div class="fillterhori">
+                                            <input type="checkbox" name="color" value="gold" id="color-gold">
+                                            <label for="color-gold" class="ml-1">Gold</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="fillterhori">
+                                            <input type="checkbox" name="color" value="pink" id="color-pink">
+                                            <label for="color-pink" class="ml-1">Pink</label>
+                                        </div>
+                                        <div class="fillterhori">
+                                            <input type="checkbox" name="color" value="midnight" id="color-midnight">
+                                            <label for="color-midnight" class="ml-1">Midnight</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <hr color="#7B7981">
+                        </div>
+
+
+                        <div class="col-xl-12 col-lg-12 col-md-6 col-sm-6 col-12" id="cpufillter">
+                            <a id="triggercpu">
+                                <h5>Series CPU</h5>
+                                <i class="fa-solid fa-angle-up"></i>
+                                <div class="clearf"></div>
+                            </a>
+                            <form action="" method="post" id="cpubox">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="fillterhori">
+                                            <input type="checkbox" name="cpu" value="apple" id="cpu-apple">
+                                            <label for="cpu-apple" class="ml-1">Apple</label>
+                                        </div>
+                                        <div class="fillterhori">
+                                            <input type="checkbox" name="cpu" value="applem" id="cpu-applem">
+                                            <label for="cpu-applem" class="ml-1">Apple M</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="fillterhori">
+                                            <input type="checkbox" name="cpu" value="celeron" id="cpu-celeron">
+                                            <label for="cpu-celeron" class="ml-1">Celeron</label>
+                                        </div>
+                                        <div class="fillterhori">
+                                            <input type="checkbox" name="cpu" value="corem" id="cpu-corem">
+                                            <label for="cpu-corem" class="ml-1">Core M</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <hr color="#7B7981">
+                        </div>
+
+
+                        <div class="col-xl-12 col-lg-12 col-md-6 col-sm-6 col-12" id="chipsfillter">
+                            <a id="triggerchips">
+                                <h5>Chips</h5>
+                                <i class="fa-solid fa-angle-up"></i>
+                                <div class="clearf"></div>
+                            </a>
+                            <form action="" method="post" id="chipsbox">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="fillterhori">
+                                            <input type="checkbox" name="chips" value="amd" id="chips-amd">
+                                            <label for="chips-amd" class="ml-1">AMD</label>
+                                        </div>
+                                        <div class="fillterhori">
+                                            <input type="checkbox" name="chips" value="gtx" id="chips-gtx">
+                                            <label for="chips-gtx" class="ml-1">1650</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="fillterhori">
+                                            <input type="checkbox" name="chips" value="gtxti" id="chips-gtxti">
+                                            <label for="chips-gtxti" class="ml-1">1650Ti</label>
+                                        </div>
+                                        <div class="fillterhori">
+                                            <input type="checkbox" name="chips" value="geforce" id="chips-geforce">
+                                            <label for="chips-geforce" class="ml-1">GeForce</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <hr color="#7B7981">
+                        </div>
+
+
+                        <div class="col-xl-12 col-lg-12 col-md-6 col-sm-6 col-12" id="ramfillter">
+                            <a id="triggerram">
+                                <h5>RAM</h5>
+                                <i class="fa-solid fa-angle-up"></i>
+                                <div class="clearf"></div>
+                            </a>
+                            <form action="" method="post" id="rambox">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="fillterhori">
+                                            <input type="checkbox" name="ram" value="16gb" id="ram-16gb">
+                                            <label for="ram-16gb" class="ml-1">16GB</label>
+                                        </div>
+                                        <div class="fillterhori">
+                                            <input type="checkbox" name="ram" value="4gb" id="ram-4gb">
+                                            <label for="ram-4gb" class="ml-1">4GB</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="fillterhori">
+                                            <input type="checkbox" name="ram" value="32gb" id="ram-32gb">
+                                            <label for="ram-32gb" class="ml-1">32GB</label>
+                                        </div>
+                                        <div class="fillterhori">
+                                            <input type="checkbox" name="ram" value="64gb" id="ram-64gb">
+                                            <label for="ram-64gb" class="ml-1">64GB</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <hr color="#7B7981">
+                        </div>
+
+
+                        <div class="col-xl-12 col-lg-12 col-md-6 col-sm-6 col-12" id="screenfillter">
+                            <a id="triggerscreen">
+                                <h5>Screen size</h5>
+                                <i class="fa-solid fa-angle-up"></i>
+                                <div class="clearf"></div>
+                            </a>
+                            <form action="" method="post" id="screenbox">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="fillterhori">
+                                            <input type="checkbox" name="screen" value="11.6" id="screen-11.6">
+                                            <label for="screen-11.6" class="ml-1">11.6"</label>
+                                        </div>
+                                        <div class="fillterhori">
+                                            <input type="checkbox" name="screen" value="12.3" id="screen-12.3">
+                                            <label for="screen-12.3" class="ml-1">12.3"</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="fillterhori">
+                                            <input type="checkbox" name="screen" value="13" id="screen-13">
+                                            <label for="screen-13" class="ml-1">13"</label>
+                                        </div>
+                                        <div class="fillterhori">
+                                            <input type="checkbox" name="screen" value="13.3" id="screen-13.3">
+                                            <label for="screen-13.3" class="ml-1">13.3"</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <hr color="#7B7981">
+                        </div>
+
+
+                        <div class="col-xl-12 col-lg-12 col-md-6 col-sm-6 col-12" id="resolutionfillter">
+                            <a id="triggerresolution">
+                                <h5>Resolution</h5>
+                                <i class="fa-solid fa-angle-up"></i>
+                                <div class="clearf"></div>
+                            </a>
+                            <form action="" method="post" id="resolutionbox">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="fillterhori">
+                                            <input type="checkbox" name="resolution" value="3k" id="resolution-3k">
+                                            <label for="resolution-3k" class="ml-1">3K</label>
+                                        </div>
+                                        <div class="fillterhori">
+                                            <input type="checkbox" name="resolution" value="fullhd"
+                                                id="resolution-fullhd">
+                                            <label for="resolution-fullhd" class="ml-1">Full HD</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="fillterhori">
+                                            <input type="checkbox" name="resolution" value="fullhdd"
+                                                id="resolution-fullhdd">
+                                            <label for="resolution-fullhdd" class="ml-1">Full HD+</label>
+                                        </div>
+                                        <div class="fillterhori">
+                                            <input type="checkbox" name="resolution" value="hd" id="resolution-hd">
+                                            <label for="resolution-hd" class="ml-1">HD</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="button-container">
+                        <button class="btn custom-btn btnfillter">Clear</button>
+                        <button class="btn custom-btn btnfillter2">Apply</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products Column -->
+            <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12 mt-lg-0 mt-4 products-column">
+                <!-- Products Header -->
+                <div id="titlelaptop">
+                    <h4>Laptops (480 products)</h4>
+                </div>
+                <div class="row" id="sortby-pd">
+                    <div class="d-flex align-items-center">
+                        <div class="align-self-center">Sort by:</div>
+                        <button class="btnsortby" type="button">
+                            Best promotions
+                        </button>
+                        <button class="btnsortby2" type="button">
+                            Price: Low to high
+                        </button>
+                        <button class="btnsortby2" type="button">
+                            Price: High to low
+                        </button>
+                        <button class="btnsortby2" type="button">
+                            Newest products
+                        </button>
+                        <button class="btnsortby2" type="button">
+                            Best selling
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Products -->
+
+
+                <div class="row" id="cardproducts-pd">
+                    <!-- Product Card -->
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6 mb-3">
+                        <a href="Qtech-Detail.html">
+                            <div class="products">
+                                <img src="./imgs/products card img/pdimg09.png" class="img-thumbnail" />
+                                <div class="product-content">
+                                    <h3>Laptop ASUS ROG Flow i9 RAM 16GB</h3>
+                                    <span class="original-price">$2870</span>
+                                    <div class="row col justify-content-start align-items-center">
+                                        <span class="sale-price">$2652</span>
+                                        <div class="sale-container"><span>-8%</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6 mb-3">
+                        <div class="products">
+                            <img src="./imgs/products card img/pdimg02.png" class="img-thumbnail" />
+                            <div class="product-content">
+                                <h3>Laptop ASUS Zephyrus RAM 16GB</h3>
+                                <span class="original-price">$1870</span>
+                                <div class="row col justify-content-start align-items-center">
+                                    <span class="sale-price">$1863</span>
+                                    <div class="sale-container"><span>-10%</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6 mb-3 d-none d-lg-block">
+                        <div class="products">
+                            <img src="./imgs/products card img/pdimg03.png" class="img-thumbnail" />
+                            <div class="product-content">
+                                <h3>Laptop GIGABYTE G5 i5 RAM 8GB</h3>
+                                <span class="original-price">$1113</span>
+                                <div class="row col justify-content-start align-items-center">
+                                    <span class="sale-price">$839</span>
+                                    <div class="sale-container"><span>-25%</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ... products row 2 -->
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6 mb-3">
+                        <div class="products">
+                            <img src="./imgs/products card img/pdimg04.png" class="img-thumbnail" />
+                            <div class="product-content">
+                                <h3>Laptop MSI Raider i9 RAM 64GB</h3>
+                                <span class="original-price">$4391</span>
+                                <div class="row col justify-content-start align-items-center">
+                                    <span class="sale-price">$4564</span>
+                                    <div class="sale-container"><span>-8%</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6 mb-3">
+                        <div class="products">
+                            <img src="./imgs/products card img/pdimg05.png" class="img-thumbnail" />
+                            <div class="product-content">
+                                <h3>Laptop HP Victus i5 RAM 16GB</h3>
+                                <span class="original-price">$1365</span>
+                                <div class="row col justify-content-start align-items-center">
+                                    <span class="sale-price">$1299</span>
+                                    <div class="sale-container"><span>-5%</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6 mb-3 d-none d-lg-block">
+                        <div class="products">
+                            <img src="./imgs/products card img/pdimg06.png" class="img-thumbnail" />
+                            <div class="product-content">
+                                <h3>Laptop ACER Predator i9 RAM 32GB</h3>
+                                <span class="original-price">$5121</span>
+                                <div class="row col justify-content-start align-items-center">
+                                    <span class="sale-price">$4999</span>
+                                    <div class="sale-container"><span>-5%</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ... products row 3 -->
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6 mb-3">
+                        <div class="products">
+                            <img src="./imgs/products card img/pdimg07.png" class="img-thumbnail" />
+                            <div class="product-content">
+                                <h3>Laptop ASUS TUF i7 RAM 16GB</h3>
+                                <span class="original-price">$999</span>
+                                <div class="row col justify-content-start align-items-center">
+                                    <span class="sale-price">$912</span>
+                                    <div class="sale-container"><span>-8%</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6 mb-3">
+                        <div class="products">
+                            <img src="./imgs/products card img/pdimg08.png" class="img-thumbnail" />
+                            <div class="product-content">
+                                <h3>Laptop ACER Aspire 7 RTX 3050/RAM 8GB</h3>
+                                <span class="original-price">$957</span>
+                                <div class="row col justify-content-start align-items-center">
+                                    <span class="sale-price">$718</span>
+                                    <div class="sale-container"><span>-25%</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6 mb-3 d-none d-lg-block">
+                        <div class="products">
+                            <img src="./imgs/products card img/pdimg01.png" class="img-thumbnail" />
+                            <div class="product-content">
+                                <h3>Laptop ACER Nitro 16 RAM 8GB</h3>
+                                <span class="original-price">$1304</span>
+                                <div class="row col justify-content-start align-items-center">
+                                    <span class="sale-price">$1217</span>
+                                    <div class="sale-container"><span>-7%</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ... products row 4 -->
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6 mb-3">
+                        <div class="products">
+                            <img src="./imgs/products card img/pdimg10.png" class="img-thumbnail" />
+                            <div class="product-content">
+                                <h3>Laptop GIGABYTE A5 Ryzen 5 RAM 8GB</h3>
+                                <span class="original-price">$1044</span>
+                                <div class="row col justify-content-start align-items-center">
+                                    <span class="sale-price">$989</span>
+                                    <div class="sale-container"><span>-5%</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6 mb-3">
+                        <div class="products">
+                            <img src="./imgs/products card img/pdimg11.png" class="img-thumbnail" />
+                            <div class="product-content">
+                                <h3>Laptop ASUS TUF i7 RAM 16GB</h3>
+                                <span class="original-price">$1522</span>
+                                <div class="row col justify-content-start align-items-center">
+                                    <span class="sale-price">$1248</span>
+                                    <div class="sale-container"><span>-8%</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6 mb-3 d-none d-lg-block">
+                        <div class="products">
+                            <img src="./imgs/products card img/pdimg12.png" class="img-thumbnail" />
+                            <div class="product-content">
+                                <h3>Laptop ACER Nitro 5 RAM 8GB</h3>
+                                <span class="original-price">$1174</span>
+                                <div class="row col justify-content-start align-items-center">
+                                    <span class="sale-price">$1130</span>
+                                    <div class="sale-container"><span>-5%</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ... products row 5 -->
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6 ">
+                        <div class="products">
+                            <img src="./imgs/products card img/pdimg13.png" class="img-thumbnail" />
+                            <div class="product-content">
+                                <h3>Laptop gaming Acer Predator</h3>
+                                <span class="original-price">$1869</span>
+                                <div class="row col justify-content-start align-items-center">
+                                    <span class="sale-price">$1738</span>
+                                    <div class="sale-container"><span>-7%</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6 ">
+                        <div class="products">
+                            <img src="./imgs/products card img/pdimg14.png" class="img-thumbnail" />
+                            <div class="product-content">
+                                <h3>Laptop ASUS Zephyrus RAM 32GB</h3>
+                                <span class="original-price">$5652</span>
+                                <div class="row col justify-content-start align-items-center">
+                                    <span class="sale-price">$5521</span>
+                                    <div class="sale-container"><span>-23%</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-6  d-none d-lg-block">
+                        <div class="products">
+                            <img src="./imgs/products card img/pdimg15.png" class="img-thumbnail" />
+                            <div class="product-content">
+                                <h3>Laptop Lenovo LOQ i7 RAM 16GB</h3>
+                                <span class="original-price">$1304</span>
+                                <div class="row col justify-content-start align-items-center">
+                                    <span class="sale-price">$1204</span>
+                                    <div class="sale-container"><span>-8%</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="pagenumber" class="d-flex justify-content-center">
+                    <ul class="pagination custom-pagination">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">4</a></li>
+                        <li class="page-item"><a class="page-link" href="#">5</a></li>
+                        <li class="page-item"><a class="page-link" href="#">6</a></li>
+                        <li class="page-item"><a class="page-link" href="#">7</a></li>
+                        <li class="page-item"><span class="page-link dots">...</span></li>
+                        <li class="page-item"><a class="page-link" href="#">24</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+
+            </div>
+
+
+
+
+        </div>
+    </div>
+
+    <!-- banner bottom -->
+
+    <div class="container-fluid" id="banner2-pd">
+        <img class="img-fluid" src="imgs/bannerbottom-pd.png" />
+        <div class="container" id="bannercontent2-pd">
+            <h4>JOIN EDUCATION PROGRAM</h4>
+            <p>Enjoy special student rates with 15% off.</p>
+            <div class="row justify-content-center d-none d-md-block">
+                <a href="#" class="learnmore-pd" type="button">Learn more</a>
+                <i class="learnmoreicon fa-solid fa-angle-right"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="container-fluid" id="bgfooter">
+        <div class="container">
+            <div class="row">
+                <div class="col-6 col-xl-2 navifooter">
+                    <h1>About us</h1>
+                    <p>Our story</p>
+                    <p>Carrers</p>
+                    <p>Services</p>
+                    <p>Our Showrooms</p>
+                </div>
+                <div class="col-6 col-xl-2 navifooter">
+                    <h1>Support</h1>
+                    <p>For Individuals</p>
+                    <p>For Business</p>
+                    <p>For Education</p>
+                    <p>FAQs</p>
+                </div>
+                <div class="col-6 col-xl-2 navifooter">
+                    <h1>Customers</h1>
+                    <p>Return Policy</p>
+                    <p>Email Preferences</p>
+                    <p>Student Discount</p>
+                </div>
+                <div class="col-6 col-xl-2 navifooter">
+                    <h1>Follow us</h1>
+                    <div class="d-flex">
+                        <a href="#"><img src="imgs/fb.svg" class="socialicon" /></a>
+                        <a href="#"><img src="imgs/insta.svg" class="socialicon" /></a>
+                    </div>
+                    <div class="d-flex">
+                        <a href="#"><img src="imgs/twitter.svg" class="socialicon" /></a>
+                        <a href="#"><img src="imgs/yt.svg" class="socialicon" /></a>
+                    </div>
+                    <div class="d-flex">
+                        <a href="#"><img src="imgs/discord.svg" class="socialicon" /></a>
+                        <a href="#"><img src="imgs/twitch.svg" class="socialicon" /></a>
+                    </div>
+                </div>
+                <div class="col-xl-4 navifooter">
+                    <h1>Payment</h1>
+                    <div class="d-flex">
+                        <img src="imgs/visa.svg" class="paymenticon" />
+                        <img src="imgs/paypal.svg" class="paymenticon" />
+                        <img src="imgs/applepay.svg" class="paymenticon" />
+                        <img src="imgs/vnpay.svg" class="paymenticon" />
+                        <img src="imgs/samsungpay.svg" class="paymenticon" />
+                    </div>
+                    <div class="input-group emailaddress">
+                        <input placeholder="Enter Email Address" class="form-control emailinput" />
+                        <a href="#" class="searchbutton d-flex align-items-center">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </a>
+                    </div>
+                    <div class="receivenews">
+                        <input type="checkbox" class="checkbox" />
+                        Yes, i want to receive news and products emails. Read our
+                        <a href="#">privacy policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+</body>
+
+</html>
